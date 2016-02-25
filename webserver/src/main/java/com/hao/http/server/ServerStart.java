@@ -16,24 +16,34 @@ public class ServerStart {
 	private static final int THREADS = 6;
 	
 	public static void main(String[] args) {
+		String filePath = "D:/tmp";
 		try {
-			new ServerStart().start(getParameter(args));
+			new ServerStart().start(getParameter(args),filePath);
 		} catch (IOException e) {
 			logger.error("startup error",e);
 		}
-		
-		
 	}
-	
-	public void start(int port) throws IOException{
+
+	/**
+	 *
+	 * @param port
+	 * @param filePath
+	 * @throws IOException
+     */
+	public void start(int port,String filePath) throws IOException{
 		ServerSocket serverSocket = new ServerSocket(DEFAULT_PORT);
 		System.out.println("start listening on port..." + port);
 		ExecutorService executor = Executors.newFixedThreadPool(THREADS);
 		while(true){
-			executor.submit(new RequestHandler(serverSocket.accept()));
+			executor.submit(new RequestHandler(serverSocket.accept(),filePath));
 		}
 	}
-	
+
+	/**
+	 * 获取端口号
+	 * @param args
+	 * @return
+     */
 	public static int getParameter(String[] args){
 		if(args.length > 0){
 			int port = Integer.parseInt(args[0]);

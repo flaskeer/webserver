@@ -15,10 +15,11 @@ public class RequestHandler implements Runnable{
 	
 	private Socket socket;
 	
+	private String filePath;
 	
-	
-	public RequestHandler(Socket socket) {
+	public RequestHandler(Socket socket,String filePath) {
 		this.socket = socket;
+		this.filePath = filePath;
 	}
 
 
@@ -28,7 +29,7 @@ public class RequestHandler implements Runnable{
 			InputStream in = socket.getInputStream();
 			OutputStream out = socket.getOutputStream();
 			HttpRequest request = new HttpRequest(in);
-			HttpResponse response = new HttpResponse(request);
+			HttpResponse response = new HttpResponse(request,filePath);
 			response.write(out);
 			socket.close();
 		} catch (Exception e) {

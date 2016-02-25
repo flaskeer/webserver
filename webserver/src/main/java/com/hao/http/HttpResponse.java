@@ -17,10 +17,11 @@ public class HttpResponse {
 	public static final String VERSION = "HTTP/1.1";
 	
 	List<String> header = new ArrayList<String>();
-	
+
+
 	byte[] body;
 	
-	public HttpResponse(HttpRequest req) {
+	public HttpResponse(HttpRequest req,String filePath) {
 		switch (req.method) {
 		case HEAD:
 			fillHeaders(Status._200);
@@ -28,7 +29,7 @@ public class HttpResponse {
 		case GET:
 		try {
 			fillHeaders(Status._200);
-			File file = new File("d:/tmp");
+			File file = new File(filePath);
 			System.out.println(file.getAbsolutePath());
 			if(file.isDirectory()){
 				header.add(ContentType.HTML.toString());
@@ -39,11 +40,12 @@ public class HttpResponse {
 				sb.append("</h1><hr><pre>");
 				File[] files = file.listFiles();
 				for (File subflie : files) {
-					sb.append(" <a href=\"" + subflie.getPath() + "\">" + subflie.getPath() + "</a>\n");
+					sb.append(" <a href=\"" + "localhost:8080/" + subflie.getPath() + "\" target=\"_blank\">" + subflie.getPath() + "</a>\n");
 				}
 				sb.append("<hr></pre></body></html>");
 				fillResponse(sb.toString());
-			}else if(file.exists()){
+			}
+			else if(file.exists()){
 				setContentType(req.uri,header);
 				fillResponse(getBytes(file));
 			}else{

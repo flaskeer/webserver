@@ -71,20 +71,7 @@ public class Cache {
         map.put(key,new MapEntry(key,new CacheEntry(header,body),queue));
     }
 
-    public static void main(String[] args) {
-        String x1 = "\\[das!s";
-        String x2 = "fdgda\\[das!sfsdfs";
-		/*String[] x4 = x2.split("!s");
-		for (int j = 0; j < x4.length; j++) {
-			System.out.println(x4[i]);
-		}
-		System.out.println("----------------------------");*/
-        String[] x3 = x2.split(x1);
-        for (int j = 0; j < x3.length; j++) {
-            System.out.println(x3[j]);
-        }
 
-    }
 
 
 
