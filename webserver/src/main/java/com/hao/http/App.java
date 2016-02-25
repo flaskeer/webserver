@@ -1,4 +1,4 @@
-package cc.hao.http;
+package com.hao.http;
 
 /**
  * Hello world!
