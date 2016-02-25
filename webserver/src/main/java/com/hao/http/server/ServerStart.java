@@ -27,7 +27,7 @@ public class ServerStart {
 	
 	public void start(int port) throws IOException{
 		ServerSocket serverSocket = new ServerSocket(DEFAULT_PORT);
-		System.out.println("start listening on port...");
+		System.out.println("start listening on port..." + port);
 		ExecutorService executor = Executors.newFixedThreadPool(THREADS);
 		while(true){
 			executor.submit(new RequestHandler(serverSocket.accept()));

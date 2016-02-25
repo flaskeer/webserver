@@ -28,9 +28,8 @@ public class HttpResponse {
 		case GET:
 		try {
 			fillHeaders(Status._200);
-			File file = new File("d:\\markdown笔记\\collection.md");
+			File file = new File("d:/tmp");
 			System.out.println(file.getAbsolutePath());
-//			FileUtil.listAllFiles(file);
 			if(file.isDirectory()){
 				header.add(ContentType.HTML.toString());
 				StringBuilder sb = new StringBuilder("<html><head><title>Index of");
